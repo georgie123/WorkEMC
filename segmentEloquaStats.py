@@ -17,6 +17,7 @@ import openpyxl
 from openpyxl.styles import PatternFill
 from openpyxl.utils import get_column_letter
 
+
 shp_simple_countries = r'C:/Users/Georges/PycharmProjects/data/simple_countries/simple_countries'
 
 workDirectory = r'C:/Users/Georges/Downloads/'
