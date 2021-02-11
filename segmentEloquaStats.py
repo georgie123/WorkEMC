@@ -41,9 +41,10 @@ df_Country_count['Percent'] = df_Country_count['Percent'].round(decimals=2)
 
 
 # COUNT JOB TITLE
+df['Job Title'] = df['Job Title'].str.replace(r'[,;.:()%]', '', regex=True)
 df_Job_count = pd.DataFrame(df.groupby(['Job Title'], dropna=False).size(), columns=['Total'])\
     .sort_values(['Total'], ascending=False).reset_index()
-df_Job_count = df_Job_count.fillna('Unknow')
+df_Job_count = df_Job_count.fillna('Unknown')
 
 df_Job_count['Percent'] = (df_Job_count['Total'] / df_Job_count['Total'].sum()) * 100
 df_Job_count['Percent'] = df_Job_count['Percent'].round(decimals=2)
@@ -52,44 +53,51 @@ df_Job_count['Percent'] = df_Job_count['Percent'].round(decimals=2)
 # COUNT JOB TITLE PER COUNTRY
 df_SpecialtiesPerCountry_count = pd.DataFrame(df.groupby(['Country Name', 'Job Title'], dropna=False)\
     .size(), columns=['Total']).sort_values(['Country Name', 'Total'], ascending=[True, False]).reset_index()
-df_SpecialtiesPerCountry_count = df_SpecialtiesPerCountry_count.fillna('Unknow')
+df_SpecialtiesPerCountry_count = df_SpecialtiesPerCountry_count.fillna('Unknown')
 
 df_SpecialtiesPerCountry_count['Percent'] = (df_SpecialtiesPerCountry_count['Total'] / df_SpecialtiesPerCountry_count['Total'].sum()) * 100
 df_SpecialtiesPerCountry_count['Percent'] = df_SpecialtiesPerCountry_count['Percent'].round(decimals=2)
 
 
 # COUNT COMPANY
+df['Company'] = df['Company'].str.upper().str.replace(r'[,;.:()%]', '', regex=True)
+df['Company'] = df['Company'].str.upper().str.replace(' S R L', ' SRL').str.replace('S R L ', 'SRL ')
 df_Company_count = pd.DataFrame(df.groupby(['Company'], dropna=False).size(), columns=['Total'])\
     .sort_values(['Total'], ascending=False).reset_index()
-df_Company_count = df_Company_count.fillna('Unknow or none')
+df_Company_count = df_Company_count.fillna('UNKNOWN OR NONE')
 
 df_Company_count['Percent'] = (df_Company_count['Total'] / df_Company_count['Total'].sum()) * 100
 df_Company_count['Percent'] = df_Company_count['Percent'].round(decimals=2)
 
 
 # COUNT EMAIL DOMAINS
+df['Email Address'] = df['Email Address'].str.lower()
 df['Domain'] = df['Email Address'].str.split('@').str[1]
 df_Email_DNS_count = pd.DataFrame(df.groupby(['Domain'], dropna=False).size(), columns=['Total'])\
     .sort_values(['Total'], ascending=False).reset_index()
-df_Email_DNS_count = df_Email_DNS_count.fillna('Unknow')
+df_Email_DNS_count = df_Email_DNS_count.fillna('Unknown')
 
 df_Email_DNS_count['Percent'] = (df_Email_DNS_count['Total'] / df_Email_DNS_count['Total'].sum()) * 100
 df_Email_DNS_count['Percent'] = df_Email_DNS_count['Percent'].round(decimals=2)
 
 
 # COUNT STATE
+df['State or Province'] = df['State or Province'].str.upper().str.replace(r'\d+', '').str.replace(r'[,;.:()%]', '', regex=True)
+df['State or Province'] = df['State or Province'].replace(r'^\s+$', np.nan, regex=True)
 df_State_count = pd.DataFrame(df.groupby(['Country Name', 'State or Province'], dropna=False).size(), columns=['Total'])\
     .sort_values(['Country Name', 'Total'], ascending=[True, False]).reset_index()
-df_State_count = df_State_count.fillna('Unknow')
+df_State_count = df_State_count.fillna('UNKNOWN')
 
 df_State_count['Percent'] = (df_State_count['Total'] / df_State_count['Total'].sum()) * 100
 df_State_count['Percent'] = df_State_count['Percent'].round(decimals=2)
 
 
 # COUNT CITY
+df['City'] = df['City'].str.upper().str.replace(r'\d+', '').str.title().str.replace(r'[,;.:()%]', '', regex=True)
+df['City'] = df['City'].replace(r'^\s+$', np.nan, regex=True)
 df_City_count = pd.DataFrame(df.groupby(['Country Name', 'City'], dropna=False).size(), columns=['Total'])\
     .sort_values(['Country Name', 'Total'], ascending=[True, False]).reset_index()
-df_City_count = df_City_count.fillna('Unknow')
+df_City_count = df_City_count.fillna('Unknown')
 
 df_City_count['Percent'] = (df_City_count['Total'] / df_City_count['Total'].sum()) * 100
 df_City_count['Percent'] = df_City_count['Percent'].round(decimals=2)
