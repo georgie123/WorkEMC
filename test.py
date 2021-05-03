@@ -1,47 +1,40 @@
-import os
-from tabulate import tabulate as tab
+import xml.etree.ElementTree as ET
+from selenium import webdriver
 
-import pandas as pd
+chrome_path = 'C:/Users/Georges/PycharmProjects/chromedriver.exe'
+browser = webdriver.Chrome(chrome_path)
 
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-from matplotlib.patches import Polygon
-from matplotlib.collections import PatchCollection
-from mpl_toolkits.basemap import Basemap
+tree = ET.parse('C:/Users/Georges/Downloads/NoEloqua.xml')
+root = tree.getroot()
 
-import numpy as np
+for NoEloqua in root.findall('NoEloqua'):
+    xml_title = NoEloqua.find('title').text
+    xml_FirstName = NoEloqua.find('First_x0020_Name').text
+    xml_LastName = NoEloqua.find('Last_x0020_Name').text
+    xml_Email = NoEloqua.find('Email').text
+    xml_JobTitle = NoEloqua.find('Job_x0020_Title').text
 
-from PIL import Image, ImageOps
+    browser.get('https://www.euromedicom.com/amwc-asia/en/contact/receive-amwc-asia-updates.html')
 
-import openpyxl
-from openpyxl.styles import PatternFill
-from openpyxl.utils import get_column_letter
+    try:
+        browser.find_elements_by_class_name('cookieButton')[0].click()
+    except Exception:
+        pass
 
-shp_simple_countries = r'C:/Users/Georges/PycharmProjects/data/simple_countries/simple_countries'
+    title = browser.find_element_by_name('title')
+    firstname = browser.find_element_by_id('FirstName')
+    lastname = browser.find_element_by_name('surname')
+    email = browser.find_element_by_name('personalemail')
+    specialty = browser.find_element_by_name('jobTitle')
+    country = browser.find_element_by_name('countryOfResidence')
+    thirdpaty = browser.find_element_by_name('subscriptiongdprthirdparty')
 
-workDirectory = r'C:/Users/Georges/Downloads/'
+    title.send_keys(xml_title)
+    firstname.send_keys(xml_FirstName)
+    lastname.send_keys(xml_LastName)
+    email.send_keys(xml_Email)
+    specialty.send_keys(xml_JobTitle)
+    country.send_keys('France')
+    thirdpaty.send_keys('Yes')
 
-segmentFileName = 'VCS_2021_Delegates&ExhibitorsAllEditions'
-
-outputExcelFile = workDirectory+segmentFileName+'_Counts.xlsx'
-
-# Excel import
-inputExcelFile = workDirectory+segmentFileName+'.xlsx'
-df = pd.read_excel(inputExcelFile, sheet_name='Sheet1', engine='openpyxl',
-                   usecols=['Email Address', 'Job Title', 'Company', 'City', 'State or Province', 'Country Name'])
-
-
-# COUNT CITY
-df['City'] = df['City'].str.upper().str.replace(r'\d+', '').str.title().str.replace(r'[,;.:()%]', '', regex=True)
-df['City'] = df['City'].replace(r'^\s+$', np.nan, regex=True)
-df_City_count = pd.DataFrame(df.groupby(['Country Name', 'City'], dropna=False).size(), columns=['Total'])\
-    .sort_values(['Country Name', 'Total'], ascending=[True, False]).reset_index()
-df_City_count = df_City_count.fillna('Unknow')
-
-df_City_count['Percent'] = (df_City_count['Total'] / df_City_count['Total'].sum()) * 100
-df_City_count['Percent'] = df_City_count['Percent'].round(decimals=2)
-
-
-# TERMINAL OUTPUTS AND TESTS
-print(tab(df_City_count, headers='keys', tablefmt='psql'))
-print("OK, export done!")
+    browser.find_element_by_id('formSubmit').click()

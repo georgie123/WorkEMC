@@ -22,13 +22,13 @@ shp_simple_countries = r'C:/Users/Georges/PycharmProjects/data/simple_countries/
 
 workDirectory = r'C:/Users/Georges/Downloads/'
 
-segmentFileName = 'VCS_2021_Delegates&ExhibitorsAllEditions'
+segmentFileName = 'Sponsored_Teoxane'
 
 outputExcelFile = workDirectory+segmentFileName+'_Counts.xlsx'
 
 # Excel import
 inputExcelFile = workDirectory+segmentFileName+'.xlsx'
-df = pd.read_excel(inputExcelFile, sheet_name='Sheet1', engine='openpyxl',
+df = pd.read_excel(inputExcelFile, sheet_name='union', engine='openpyxl',
                    usecols=['Email Address', 'Job Title', 'Company', 'City', 'State or Province', 'Country Name'])
 
 
@@ -83,7 +83,7 @@ df_Email_DNS_count['Percent'] = df_Email_DNS_count['Percent'].round(decimals=2)
 
 
 # COUNT STATE
-df['State or Province'] = df['State or Province'].str.upper().str.replace(r'\d+', '').str.replace(r'[,;.:()%]', '', regex=True)
+df['State or Province'] = df['State or Province'].str.upper().str.replace(r'\d+', '', regex=True).str.replace(r'[,;.:()%]', '', regex=True)
 df['State or Province'] = df['State or Province'].replace(r'^\s+$', np.nan, regex=True)
 df_State_count = pd.DataFrame(df.groupby(['Country Name', 'State or Province'], dropna=False).size(), columns=['Total'])\
     .sort_values(['Country Name', 'Total'], ascending=[True, False]).reset_index()
@@ -94,7 +94,7 @@ df_State_count['Percent'] = df_State_count['Percent'].round(decimals=2)
 
 
 # COUNT CITY
-df['City'] = df['City'].str.upper().str.replace(r'\d+', '').str.title().str.replace(r'[,;.:()%]', '', regex=True)
+df['City'] = df['City'].str.upper().str.replace(r'\d+', '', regex=True).str.title().str.replace(r'[,;.:()%]', '', regex=True)
 df['City'] = df['City'].replace(r'^\s+$', np.nan, regex=True)
 df_City_count = pd.DataFrame(df.groupby(['Country Name', 'City'], dropna=False).size(), columns=['Total'])\
     .sort_values(['Country Name', 'Total'], ascending=[True, False]).reset_index()
