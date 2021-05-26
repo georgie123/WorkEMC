@@ -35,6 +35,19 @@ listType = []
 lines = file.readlines()
 
 for num, x in enumerate(lines):
+    if x == 'Subject:\tAMS Virtual - Contact Us\n':
+        listSource.append('AMS FACE '+str(year))
+        listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
+        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', '').title())
+        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append('')
+        listCompany.append('')
+        listTheme.append('AA')
+        listType.append('DELEGATE')
+
     if x == 'Subject:\tFACE 2021 Program Download - Delegate Prospect Lead\n':
         listSource.append('AEM FACE '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
@@ -132,7 +145,7 @@ for num, x in enumerate(lines):
         listFirstname.append(lines[num+6].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
         listLastname.append(lines[num+7].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
         listEmail.append(lines[num+8].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
-        listSpeciality.append('Other Gynecology Specialty')
+        listSpeciality.append('Other')
         listCountry.append(lines[num+9].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
         listPhone.append('')
         listCompany.append('')
