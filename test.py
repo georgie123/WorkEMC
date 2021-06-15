@@ -1,39 +1,43 @@
+# Importer les packages
 from datetime import date
+from tkinter import *
+from tkinter.filedialog import askopenfilename, asksaveasfilename
+
 import pandas as pd
 from tabulate import tabulate
 
-AemFile = 'C:/Users/Georges/Downloads/20210511-AEM-Emails.txt'
-file = open(AemFile, 'r')
+#Filedialog
+Tk().withdraw()
+chemin1 = askopenfilename()
+print(chemin1)
 
-year = date.today().year
+#Importer le fichier excel avec le nom de la page
+df1 = pd.read_excel(chemin1,
+  sheet_name='DATA_carte_inter_hors_SUAP', engine='openpyxl', usecols=[0,1,2], header= 5-1, skipfooter=1,)
+print(tabulate(df1.head(10), headers='keys', tablefmt='psql', showindex = False))
 
-listSubject = []
-listFirstname = []
-listLastname = []
-listEmail = []
-listSpeciality = []
-listCountry = []
+#Incorporer un compte des entités
+number1 = df1.shape[0]
 
-lines = file.readlines()
+#Print le compte des entités
+print('compter commune total :', number1)
 
-for num, x in enumerate(lines):
-    if x == 'Subject:\tFACE 2021 Program Download - Delegate Prospect Lead\n':
-        listSubject.append('AEM FACE DELEGATE '+str(year))
-        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', ''))
-        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', ''))
-        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', ''))
-        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', ''))
-        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+#Selectionner les lignes supérieures ou égales à 95000
+df1 = df1.loc[df1['INSEE'] >= 95000]
 
+#Print le tableau
+print(tabulate(df1.head(10), headers='keys', tablefmt='psql', showindex = False))
 
-MergeLists = list(zip(listSubject, listFirstname, listLastname, listEmail, listSpeciality, listCountry))
+#Incorporer un compte des entités
+number2 = df1.shape[0]
 
-df = pd.DataFrame(MergeLists, columns=['source', 'firstname', 'lastname', 'email', 'speciality', 'country'])
+#Print le tableau
+print('compter commune 95 :', number2)
 
-print(tabulate(df, headers='keys', tablefmt='psql', showindex=False))
+#L'index devient INSEE
+df1 = df1.set_index('INSEE')
 
-number = df.shape[0]
-print(number)
-
-# lines = file.readlines()
-# print(lines[2])
+#Exporter en csv
+Tk().withdraw()
+chemin2 = asksaveasfilename(defaultextension = '.csv', filetypes = [('csv','*.csv')])
+df1.to_csv (chemin2)

@@ -139,6 +139,19 @@ for num, x in enumerate(lines):
         listTheme.append('GYN')
         listType.append('DELEGATE')
 
+    if x == 'Subject:\tInscription au Workshop Francophone\n':
+        listSource.append('AEM EUROGIN FRENCH-WS '+str(year))
+        listTitle.append('')
+        listFirstname.append(lines[num+6].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+7].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+8].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append('Other')
+        listCountry.append(lines[num+9].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append('')
+        listCompany.append('')
+        listTheme.append('GYN')
+        listType.append('DELEGATE')
+
     if x == 'Subject:\tFrancophone Workshop - Inscription\n':
         listSource.append('AEM EUROGIN FRENCH-WS '+str(year))
         listTitle.append('')
