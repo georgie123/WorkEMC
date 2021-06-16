@@ -1,43 +1,29 @@
-# Importer les packages
-from datetime import date
-from tkinter import *
-from tkinter.filedialog import askopenfilename, asksaveasfilename
+import tkinter as tk
+root = tk.Tk()
 
-import pandas as pd
-from tabulate import tabulate
+# Create a Tkinter variable
+tkvar = tk.StringVar(root)
 
-#Filedialog
-Tk().withdraw()
-chemin1 = askopenfilename()
-print(chemin1)
+# options
+choices = ['Excluding all AMS users',
+           'Lasagne','Fries','Fish','Potatoe']
+tkvar.set('See the list') # set the default option
 
-#Importer le fichier excel avec le nom de la page
-df1 = pd.read_excel(chemin1,
-  sheet_name='DATA_carte_inter_hors_SUAP', engine='openpyxl', usecols=[0,1,2], header= 5-1, skipfooter=1,)
-print(tabulate(df1.head(10), headers='keys', tablefmt='psql', showindex = False))
+def on_selection(value):
+    global choice
+    choice = value
+    root.destroy()
 
-#Incorporer un compte des entités
-number1 = df1.shape[0]
+popupMenu = tk.OptionMenu(root, tkvar, *choices, command=on_selection)
+tk.Label(root, text="Please choose a group of segments").grid(row=0, column=0, padx=10, pady=5)
+popupMenu.grid(row=1, column =0, padx=10, pady=5)
 
-#Print le compte des entités
-print('compter commune total :', number1)
+root.mainloop()
 
-#Selectionner les lignes supérieures ou égales à 95000
-df1 = df1.loc[df1['INSEE'] >= 95000]
 
-#Print le tableau
-print(tabulate(df1.head(10), headers='keys', tablefmt='psql', showindex = False))
 
-#Incorporer un compte des entités
-number2 = df1.shape[0]
+if choice == 'Excluding all AMS users':
+    print('gogogogo Excluding all AMS users')
 
-#Print le tableau
-print('compter commune 95 :', number2)
-
-#L'index devient INSEE
-df1 = df1.set_index('INSEE')
-
-#Exporter en csv
-Tk().withdraw()
-chemin2 = asksaveasfilename(defaultextension = '.csv', filetypes = [('csv','*.csv')])
-df1.to_csv (chemin2)
+elif choice != 'Excluding all AMS users':
+  print('On attend')
