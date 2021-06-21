@@ -10,7 +10,8 @@ tkvar = tk.StringVar(root)
 
 # options
 choices = ['Including or excluding all AMS users',
-           'Including or excluding Premium AMS users']
+           'Including or excluding Premium AMS users',
+           'Including or excluding Russians']
 tkvar.set('See the list') # set the default option
 
 def on_selection(value):
@@ -46,10 +47,23 @@ SegmentsPremiumAmsUsers = [
 'https://secure.p06.eloqua.com/Main.aspx#segments&id=37524'
 ]
 
+SegmentsIncludeExcludeRussians = [
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=32494',
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=32495',
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=37406',
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=37407',
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=37353',
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=38223'
+]
+
 if choice == 'Including or excluding all AMS users':
     for i in SegmentsAllAmsUsers:
         webbrowser.get(chrome_path).open(i, new=0, autoraise=True)
 
 if choice == 'Including or excluding Premium AMS users':
     for i in SegmentsPremiumAmsUsers:
+        webbrowser.get(chrome_path).open(i, new=0, autoraise=True)
+
+if choice == 'Including or excluding Russians':
+    for i in SegmentsIncludeExcludeRussians:
         webbrowser.get(chrome_path).open(i, new=0, autoraise=True)
