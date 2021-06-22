@@ -12,7 +12,7 @@ tkvar = tk.StringVar(root)
 choices = ['Including or excluding all AMS users',
            'Including or excluding Premium AMS users',
            'Including or excluding Russians']
-tkvar.set('See the list') # set the default option
+tkvar.set('See lists') # set the default option
 
 def on_selection(value):
     global choice
