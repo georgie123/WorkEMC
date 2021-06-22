@@ -43,6 +43,8 @@ SegmentsPremiumAmsUsers = [
 'https://secure.p06.eloqua.com/Main.aspx#segments&id=37217',
 'https://secure.p06.eloqua.com/Main.aspx#segments&id=37382',
 'https://secure.p06.eloqua.com/Main.aspx#segments&id=37388',
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=37406',
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=37407',
 'https://secure.p06.eloqua.com/Main.aspx#segments&id=37517',
 'https://secure.p06.eloqua.com/Main.aspx#segments&id=37524'
 ]
