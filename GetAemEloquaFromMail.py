@@ -9,6 +9,8 @@ from datetime import date
 import pandas as pd
 from tabulate import tabulate
 
+# ACCORDING YOUR PC LANGUAGE, MAYBE YOU WILL HAVE TO CHANGE "== 'Objet:\t" FOR "== 'Subject:\t".
+
 warnings.simplefilter(action='ignore', category=SettingWithCopyWarning)
 
 AemFile = 'C:/Users/Georges/Downloads/AEM-Emails.txt'
@@ -35,7 +37,7 @@ listType = []
 lines = file.readlines()
 
 for num, x in enumerate(lines):
-    if x == 'Subject:\tAMS Virtual - Contact Us\n':
+    if x == 'Objet:\tAMS Virtual - Contact Us\n':
         listSource.append('AMS FACE '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -48,7 +50,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tFACE 2021 Program Download - Delegate Prospect Lead\n':
+    if x == 'Objet:\tFACE 2021 Program Download - Delegate Prospect Lead\n':
         listSource.append('AEM FACE '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -61,7 +63,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tContact us - FACE\n':
+    if x == 'Objet:\tContact us - FACE\n':
         listSource.append('AEM FACE '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -74,7 +76,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tFACE exhibitor pack Download - Lead\n':
+    if x == 'Objet:\tFACE exhibitor pack Download - Lead\n':
         listSource.append('AEM FACE '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -87,7 +89,20 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('EXHIBITOR')
 
-    if x == 'Subject:\tVISAGE 2021 Exhibitor pack Download - Lead\n':
+    if x == 'Objet:\tFACE newsletter subscription\n':
+        listSource.append('AEM FACE '+str(year))
+        listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
+        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', '').title())
+        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append(lines[num+24].replace('Mobile (personal) \t', '').replace('\n', '').replace(' \t', ''))
+        listCompany.append(lines[num+18].replace('Organization Alias \t', '').replace('\n', '').replace(' \t', '').title())
+        listTheme.append('AA')
+        listType.append('DELEGATE')
+
+    if x == 'Objet:\tVISAGE 2021 Exhibitor pack Download - Lead\n':
         listSource.append('AEM VISAGE '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -100,7 +115,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('EXHIBITOR')
 
-    if x == 'Subject:\tVISAGE 2021 - I would like to be contacted for Sponsorship - Leads\n':
+    if x == 'Objet:\tVISAGE 2021 - I would like to be contacted for Sponsorship - Leads\n':
         listSource.append('AEM VISAGE '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -113,7 +128,33 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('EXHIBITOR')
 
-    if x == 'Subject:\tEUROGIN - Webinar Re-watch Contacts\n':
+    if x == 'Objet:\tVISAGE 2021 Newsletter Subscription\n':
+        listSource.append('AEM VISAGE '+str(year))
+        listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
+        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', '').title())
+        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append(lines[num+24].replace('Mobile (personal) \t', '').replace('\n', '').replace(' \t', ''))
+        listCompany.append(lines[num+18].replace('Organization Alias \t', '').replace('\n', '').replace(' \t', '').title())
+        listTheme.append('AA')
+        listType.append('DELEGATE')
+
+    if x == 'Objet:\tVISAGE 2021 - Contact Us\n':
+        listSource.append('AEM VISAGE '+str(year))
+        listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
+        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', '').title())
+        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append('')
+        listCompany.append('')
+        listTheme.append('AA')
+        listType.append('DELEGATE')
+
+    if x == 'Objet:\tEUROGIN - Webinar Re-watch Contacts\n':
         listSource.append('AEM EUROGIN '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -126,7 +167,7 @@ for num, x in enumerate(lines):
         listTheme.append('GYN')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tEUROGIN Contact Us 2021\n':
+    if x == 'Objet:\tEUROGIN Contact Us 2021\n':
         listSource.append('AEM EUROGIN '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -139,7 +180,7 @@ for num, x in enumerate(lines):
         listTheme.append('GYN')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tInscription au Workshop Francophone\n':
+    if x == 'Objet:\tInscription au Workshop Francophone\n':
         listSource.append('AEM EUROGIN FRENCH-WS '+str(year))
         listTitle.append('')
         listFirstname.append(lines[num+6].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -152,7 +193,7 @@ for num, x in enumerate(lines):
         listTheme.append('GYN')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tFrancophone Workshop - Inscription\n':
+    if x == 'Objet:\tFrancophone Workshop - Inscription\n':
         listSource.append('AEM EUROGIN FRENCH-WS '+str(year))
         listTitle.append('')
         listFirstname.append(lines[num+6].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -165,7 +206,7 @@ for num, x in enumerate(lines):
         listTheme.append('GYN')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tWorkshop Francophone Replay Inscription\n':
+    if x == 'Objet:\tWorkshop Francophone Replay Inscription\n':
         listSource.append('AEM EUROGIN '+str(year))
         listTitle.append('')
         listFirstname.append(lines[num+6].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -178,7 +219,7 @@ for num, x in enumerate(lines):
         listTheme.append('GYN')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tEUROGIN Newsletter 2021\n':
+    if x == 'Objet:\tEUROGIN Newsletter 2021\n':
         listSource.append('AEM EUROGIN '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -191,7 +232,20 @@ for num, x in enumerate(lines):
         listTheme.append('GYN')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tEUROGIN 2021 Sponsorship Brochure Download - Exhibitor\n':
+    if x == 'Objet:\tEUROGIN Sales Prospect\n':
+        listSource.append('AEM EUROGIN '+str(year))
+        listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
+        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', '').title())
+        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append(lines[num+24].replace('Mobile (personal) \t', '').replace('\n', '').replace(' \t', ''))
+        listCompany.append(lines[num+18].replace('Organization Alias \t', '').replace('\n', '').replace(' \t', '').title())
+        listTheme.append('GYN')
+        listType.append('EXHIBITOR')
+
+    if x == 'Objet:\tEUROGIN 2021 Sponsorship Brochure Download - Exhibitor\n':
         listSource.append('AEM EUROGIN '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -204,7 +258,7 @@ for num, x in enumerate(lines):
         listTheme.append('GYN')
         listType.append('EXHIBITOR')
 
-    if x == 'Subject:\tAMWC Asia 2021 Program Download - Delegate Prospect Lead\n':
+    if x == 'Objet:\tAMWC Asia 2021 Program Download - Delegate Prospect Lead\n':
         listSource.append('AEM AMWC-ASIA '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -217,7 +271,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tAMWC Asia 2021 - Contact Us\n':
+    if x == 'Objet:\tAMWC Asia 2021 - Contact Us\n':
         listSource.append('AEM AMWC-ASIA '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -230,7 +284,33 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tAMWC 2021 - I would like to be contacted - Exhibitor\n':
+    if x == 'Objet:\tAMWC China 2021 - Exhibitor Pack - Leads\n':
+        listSource.append('AEM AMWC CHINA '+str(year))
+        listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
+        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', '').title())
+        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append(lines[num+24].replace('Landline (business) \t', '').replace('\n', '').replace(' \t', ''))
+        listCompany.append(lines[num+18].replace('Organization Alias \t', '').replace('\n', '').replace(' \t', '').title())
+        listTheme.append('AA')
+        listType.append('EXHIBITOR')
+
+    if x == 'Objet:\tAMWC China 2021 - I would like to be contacted - Exhibitor\n':
+        listSource.append('AEM AMWC CHINA '+str(year))
+        listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
+        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', '').title())
+        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append(lines[num+24].replace('Mobile (personal) \t', '').replace('\n', '').replace(' \t', ''))
+        listCompany.append(lines[num+18].replace('Organization Alias \t', '').replace('\n', '').replace(' \t', '').title())
+        listTheme.append('AA')
+        listType.append('EXHIBITOR')
+
+    if x == 'Objet:\tAMWC 2021 - I would like to be contacted - Exhibitor\n':
         listSource.append('AEM AMWC '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -243,7 +323,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('EXHIBITOR')
 
-    if x == 'Subject:\tAMWC 2021 Exhibitor pack Download - Lead\n':
+    if x == 'Objet:\tAMWC 2021 Exhibitor pack Download - Lead\n':
         listSource.append('AEM AMWC '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -256,7 +336,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('EXHIBITOR')
 
-    if x == 'Subject:\tAMWC Global Exhibitor Pack Download - Lead\n':
+    if x == 'Objet:\tAMWC Global Exhibitor Pack Download - Lead\n':
         listSource.append('AEM AMWC '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -269,7 +349,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('EXHIBITOR')
 
-    if x == 'Subject:\tAMWC 2021 Newsletter Subscription\n':
+    if x == 'Objet:\tAMWC 2021 Newsletter Subscription\n':
         listSource.append('AEM AMWC '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -282,7 +362,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tAMWC Monaco 2021 - Contact Us\n':
+    if x == 'Objet:\tAMWC Monaco 2021 - Contact Us\n':
         listSource.append('AEM AMWC '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -295,7 +375,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tAMWC Monaco 2020 - Contact Us\n':
+    if x == 'Objet:\tAMWC Monaco 2020 - Contact Us\n':
         listSource.append('AEM AMWC '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -308,7 +388,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tAMWC Monaco Program Download - Delegate Prospect Lead\n':
+    if x == 'Objet:\tAMWC Monaco Program Download - Delegate Prospect Lead\n':
         listSource.append('AEM AMWC '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -321,7 +401,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tAMWC Monaco 2021 - Program Download - Delegate Prospect Lead\n':
+    if x == 'Objet:\tAMWC Monaco 2021 - Program Download - Delegate Prospect Lead\n':
         listSource.append('AEM AMWC '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -334,7 +414,7 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tAMWC Global Contest - Fotona\n':
+    if x == 'Objet:\tAMWC Global Contest - Fotona\n':
         listSource.append('AEM AMWC '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -347,7 +427,20 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('DELEGATE')
 
-    if x == 'Subject:\tICAD Bangkok 2021 - I would like to be contacted - Exhibitor\n':
+    if x == 'Objet:\tCFA Spring Newsletter subscription\n':
+        listSource.append('AEM CFA '+str(year))
+        listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
+        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', '').title())
+        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append(lines[num+24].replace('Mobile (personal) \t', '').replace('\n', '').replace(' \t', ''))
+        listCompany.append(lines[num+18].replace('Organization Alias \t', '').replace('\n', '').replace(' \t', '').title())
+        listTheme.append('AA')
+        listType.append('DELEGATE')
+
+    if x == 'Objet:\tICAD Bangkok 2021 - I would like to be contacted - Exhibitor\n':
         listSource.append('AEM ICAD '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -360,7 +453,20 @@ for num, x in enumerate(lines):
         listTheme.append('AA')
         listType.append('EXHIBITOR')
 
-    if x == 'Subject:\tICAD Bangkok 2021 - I would like to attend - Delegate Prospect\n':
+    if x == 'Objet:\tICAD Bangkok 2021 - Newsletter subscription\n':
+        listSource.append('AEM ICAD '+str(year))
+        listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
+        listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
+        listLastname.append(lines[num+8].replace('Surname \t', '').replace('\n', '').replace(' \t', '').title())
+        listEmail.append(lines[num+9].replace('Email Address(personal) \t', '').replace('\n', '').replace(' \t', '').lower())
+        listSpeciality.append(lines[num+10].replace('Job Title \t', '').replace('\n', '').replace(' \t', '').title())
+        listCountry.append(lines[num+11].replace('Country \t', '').replace('\n', '').replace(' \t', '')[:-3])
+        listPhone.append(lines[num+24].replace('Mobile (personal) \t', '').replace('\n', '').replace(' \t', ''))
+        listCompany.append(lines[num+18].replace('Organization Alias \t', '').replace('\n', '').replace(' \t', '').title())
+        listTheme.append('AA')
+        listType.append('DELEGATE')
+
+    if x == 'Objet:\tICAD Bangkok 2021 - I would like to attend - Delegate Prospect\n':
         listSource.append('AEM ICAD '+str(year))
         listTitle.append(lines[num+6].replace('Title \t', '').replace('\n', '').replace(' \t', ''))
         listFirstname.append(lines[num+7].replace('First Name \t', '').replace('\n', '').replace(' \t', '').title())
@@ -391,13 +497,17 @@ df['title'] = df['title'].replace(['Other (OTHER)'], '')
 df['speciality'] = df['speciality'].replace({' And ': ' & '}, regex=True)
 
 df['speciality'] = df['speciality'].replace(['Dentistry'], 'Dentist')
+df['speciality'] = df['speciality'].replace(['Dental'], 'Dentist')
 
 df.loc[df['speciality'].str.contains('Cardiolo'), 'speciality'] = 'Cardiology'
 
 df.loc[df['speciality'].str.contains('Dermatolog'), 'speciality'] = 'Dermatologist'
+df['speciality'] = df['speciality'].replace(['Dermatolgist'], 'Dermatologist')
 df['speciality'] = df['speciality'].replace(['Skin Therapist'], 'Dermatologist')
 df['speciality'] = df['speciality'].replace(['Dernatology'], 'Dermatologist')
 df['speciality'] = df['speciality'].replace(['Dermatolgy'], 'Dermatologist')
+df['speciality'] = df['speciality'].replace(['Dermato'], 'Dermatologist')
+df['speciality'] = df['speciality'].replace(['Skincare'], 'Dermatologist')
 
 df['speciality'] = df['speciality'].replace(['Cosmetologist'], 'Cosmetologist MD')
 df['speciality'] = df['speciality'].replace(['Cosmétologue'], 'Cosmetologist MD')
@@ -427,7 +537,9 @@ df.loc[df['speciality'].str.contains('Ophthalmo'), 'speciality'] = 'Ophthalmolog
 df.loc[df['speciality'].str.contains('Medical Device'), 'speciality'] = 'Surgical Equipment'
 
 df['speciality'] = df['speciality'].replace(['Craniofacial Surgery Cosmetology'], 'Maxillofacial Surgeon')
+df.loc[df['speciality'].str.contains('Maxillo'), 'speciality'] = 'Maxillofacial Surgeon'
 
+df.loc[df['speciality'].str.contains('Aesthetic Surgery'), 'speciality'] = 'Aesthetic & Plastic Surgeon'
 df['speciality'] = df['speciality'].replace(['Plastic'], 'Aesthetic & Plastic Surgeon')
 df['speciality'] = df['speciality'].replace(['Plastic Surgery'], 'Aesthetic & Plastic Surgeon')
 df['speciality'] = df['speciality'].replace(['Aesthetics Surgery'], 'Aesthetic & Plastic Surgeon')
@@ -435,6 +547,7 @@ df['speciality'] = df['speciality'].replace(['Plastic Surgen'], 'Aesthetic & Pla
 
 df['speciality'] = df['speciality'].replace(['Surgery'], 'General Surgeon')
 df['speciality'] = df['speciality'].replace(['Surgeon'], 'General Surgeon')
+df['speciality'] = df['speciality'].replace(['General Surgery'], 'General Surgeon')
 
 df['speciality'] = df['speciality'].replace(['Md, Mph'], 'General Practitioner')
 df['speciality'] = df['speciality'].replace(['Md'], 'General Practitioner')
@@ -455,6 +568,8 @@ df['speciality'] = df['speciality'].replace(['Médecin'], 'General Practitioner'
 df['speciality'] = df['speciality'].replace(['Medecin'], 'General Practitioner')
 df['speciality'] = df['speciality'].replace(['Médecine Générale'], 'General Practitioner')
 df['speciality'] = df['speciality'].replace(['Medecine Generale'], 'General Practitioner')
+df['speciality'] = df['speciality'].replace(['Medical Doctor'], 'General Practitioner')
+df['speciality'] = df['speciality'].replace(['Pm'], 'General Practitioner')
 
 df['speciality'] = df['speciality'].replace(['Urology'], 'Urologist')
 
@@ -507,6 +622,7 @@ df.loc[df['speciality'].str.contains('Ginecolo'), 'speciality'] = 'Gynecologist/
 df.loc[df['speciality'].str.contains('Gynekolo'), 'speciality'] = 'Gynecologist/Obstetrician'
 df.loc[df['speciality'].str.contains('Obstetrics'), 'speciality'] = 'Gynecologist/Obstetrician'
 df.loc[df['speciality'].str.contains('Gyneco'), 'speciality'] = 'Gynecologist/Obstetrician'
+df.loc[df['speciality'].str.contains('Urogyn'), 'speciality'] = 'Gynecologist/Obstetrician'
 df['speciality'] = df['speciality'].replace(['Gynäkologie'], 'Gynecologist/Obstetrician')
 df['speciality'] = df['speciality'].replace(['Gynae'], 'Gynecologist/Obstetrician')
 df['speciality'] = df['speciality'].replace(['Gynae'], 'Gynecologist/Obstetrician')
@@ -520,6 +636,14 @@ df['speciality'] = df['speciality'].replace(['Ob &Gyn'], 'Gynecologist/Obstetric
 df['speciality'] = df['speciality'].replace(['Ob &Gyn'], 'Gynecologist/Obstetrician')
 df['speciality'] = df['speciality'].replace(['Ob&Gyn'], 'Gynecologist/Obstetrician')
 
+df.loc[df['speciality'].str.contains('Threads & Prp'), 'speciality'] = 'Aesthetic Practitioner'
+df.loc[df['speciality'].str.contains('Thread & Prp'), 'speciality'] = 'Aesthetic Practitioner'
+df.loc[df['speciality'].str.contains('Threads and Prp'), 'speciality'] = 'Aesthetic Practitioner'
+df.loc[df['speciality'].str.contains('Thread and Prp'), 'speciality'] = 'Aesthetic Practitioner'
+df.loc[df['speciality'].str.contains('Threads or Prp'), 'speciality'] = 'Aesthetic Practitioner'
+df.loc[df['speciality'].str.contains('Thread or Prp'), 'speciality'] = 'Aesthetic Practitioner'
+df.loc[df['speciality'].str.contains('Threads/Prp'), 'speciality'] = 'Aesthetic Practitioner'
+df.loc[df['speciality'].str.contains('Thread/Prp'), 'speciality'] = 'Aesthetic Practitioner'
 df.loc[df['speciality'].str.contains('Estética'), 'speciality'] = 'Aesthetic Practitioner'
 df.loc[df['speciality'].str.contains('Nurse Aesthetic'), 'speciality'] = 'Aesthetic Practitioner'
 df.loc[df['speciality'].str.contains('Medical Aesthetic'), 'speciality'] = 'Aesthetic Practitioner'
@@ -567,6 +691,9 @@ df.loc[df['speciality'].str.contains('Pharmacy'), 'speciality'] = 'Pharmacist'
 df.loc[df['speciality'].str.contains('Pharmacist'), 'speciality'] = 'Pharmacist'
 df['speciality'] = df['speciality'].replace(['Pharma'], 'Pharmacist')
 
+df.loc[df['speciality'].str.contains('Pharmaceuitical'), 'speciality'] = 'Pharma Industry'
+df.loc[df['speciality'].str.contains('Pharmaceutical'), 'speciality'] = 'Pharma Industry'
+
 df.loc[df['speciality'].str.contains('Distributor'), 'speciality'] = 'Distributor'
 
 df.loc[df['speciality'].str.contains('Pathology'), 'speciality'] = 'Pathologist'
@@ -588,18 +715,24 @@ df['speciality'] = df['speciality'].replace(['Eventmanager'], 'Event Manager')
 
 df['speciality'] = df['speciality'].replace(['Journalism'], 'Press')
 df['speciality'] = df['speciality'].replace(['Publisher'], 'Press')
+df['speciality'] = df['speciality'].replace(['Editor'], 'Press')
 
 df['speciality'] = df['speciality'].replace(['Clinic Owner'], 'Clinic Manager')
 
+df.loc[df['speciality'].str.contains('Internal Med'), 'speciality'] = 'Internal Medicine'
+df['speciality'] = df['speciality'].replace(['Internal'], 'Internal Medicine')
+
+df.loc[df['speciality'].str.contains('Marketing'), 'speciality'] = 'Marketing Manager'
 df['speciality'] = df['speciality'].replace(['Assistante Projets'], 'Marketing Manager')
 df['speciality'] = df['speciality'].replace(['Assistante Projet'], 'Marketing Manager')
 df['speciality'] = df['speciality'].replace(['Assistant Projets'], 'Marketing Manager')
 df['speciality'] = df['speciality'].replace(['Assistant Projet'], 'Marketing Manager')
-df.loc[df['speciality'].str.contains('Marketing'), 'speciality'] = 'Marketing Manager'
 
 df.loc[df['speciality'].str.contains('Medical Affair'), 'speciality'] = 'Business Development'
 df.loc[df['speciality'].str.contains('Development'), 'speciality'] = 'Business Development'
 df.loc[df['speciality'].str.contains('Business'), 'speciality'] = 'Business Development'
+
+df.loc[df['speciality'].str.contains('Angiologist'), 'speciality'] = 'Angiologist'
 
 df.loc[df['speciality'].str.contains('Consulting'), 'speciality'] = 'Consultant'
 
@@ -615,12 +748,14 @@ df['speciality'] = df['speciality'].replace(['Medical-Spa'], 'Spa Manager')
 df['speciality'] = df['speciality'].replace(['Medspa'], 'Spa Manager')
 
 df.loc[df['speciality'].str.contains('Founder'), 'speciality'] = 'Company Manager'
+df.loc[df['speciality'].str.contains('Direktor'), 'speciality'] = 'Company Manager'
 df.loc[df['speciality'].str.contains('Director'), 'speciality'] = 'Company Manager'
 df.loc[df['speciality'].str.contains('Directeur'), 'speciality'] = 'Company Manager'
 df['speciality'] = df['speciality'].replace(['Country Manager'], 'Company Manager')
 df['speciality'] = df['speciality'].replace(['Regional Manager'], 'Company Manager')
 df['speciality'] = df['speciality'].replace(['Managing Director'], 'Company Manager')
 df['speciality'] = df['speciality'].replace(['Head Of Strategy'], 'Company Manager')
+df['speciality'] = df['speciality'].replace(['Company'], 'Company Manager')
 
 df['speciality'] = df['speciality'].replace(['Ceo'], 'Company CEO')
 
@@ -629,6 +764,8 @@ df.loc[df['speciality'].str.contains('Sales Manager'), 'speciality'] = 'Sales Ma
 df['speciality'] = df['speciality'].replace(['Export'], 'Sales Manager/Purchasing/Operations')
 df['speciality'] = df['speciality'].replace(['Sales Manager'], 'Sales Manager/Purchasing/Operations')
 df['speciality'] = df['speciality'].replace(['Sales Program Coordinator'], 'Sales Manager/Purchasing/Operations')
+df['speciality'] = df['speciality'].replace(['Sales'], 'Sales Manager/Purchasing/Operations')
+df['speciality'] = df['speciality'].replace(['Sale'], 'Sales Manager/Purchasing/Operations')
 
 df.loc[df['speciality'].str.contains('Student'), 'speciality'] = 'Student/Resident'
 
@@ -652,7 +789,10 @@ df['speciality'] = df['speciality'].replace(['Agency'], 'Other')
 df['speciality'] = df['speciality'].replace(['Administration'], 'Other')
 df['speciality'] = df['speciality'].replace(['Administrativo'], 'Other')
 df['speciality'] = df['speciality'].replace(['Bme'], 'Other')
+df['speciality'] = df['speciality'].replace(['Employee'], 'Other')
 df['speciality'] = df['speciality'].replace(['Mg'], 'Other')
+df['speciality'] = df['speciality'].replace(['Bd'], 'Other')
+df['speciality'] = df['speciality'].replace(['Tech'], 'Other')
 df['speciality'] = df['speciality'].replace(['Data Anlayse'], 'Other')
 df['speciality'] = df['speciality'].replace(['Data Anlayst'], 'Other')
 df['speciality'] = df['speciality'].replace(['Data Anlyse'], 'Other')
@@ -665,12 +805,14 @@ df['speciality'] = df['speciality'].replace(['Hugel'], 'Other')
 df['speciality'] = df['speciality'].replace(['Go'], 'Other')
 df['speciality'] = df['speciality'].replace(['Omfs'], 'Other')
 df['speciality'] = df['speciality'].replace(['None'], 'Other')
+df['speciality'] = df['speciality'].replace(['Wellness'], 'Other')
 df['speciality'] = df['speciality'].replace(['Non'], 'Other')
 df['speciality'] = df['speciality'].replace(['No'], 'Other')
 df['speciality'] = df['speciality'].replace(['-'], 'Other')
 df['speciality'] = df['speciality'].replace(['All'], 'Other')
 df['speciality'] = df['speciality'].replace(['Gum'], 'Other')
 df['speciality'] = df['speciality'].replace(['Stand Builder'], 'Other')
+df['speciality'] = df['speciality'].replace(['Manufacturer'], 'Other')
 
 
 # DEDUPING

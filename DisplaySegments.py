@@ -50,6 +50,8 @@ SegmentsPremiumAmsUsers = [
 ]
 
 SegmentsIncludeExcludeRussians = [
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=25187',
+'https://secure.p06.eloqua.com/Main.aspx#segments&id=25184',
 'https://secure.p06.eloqua.com/Main.aspx#segments&id=32494',
 'https://secure.p06.eloqua.com/Main.aspx#segments&id=32495',
 'https://secure.p06.eloqua.com/Main.aspx#segments&id=37406',
